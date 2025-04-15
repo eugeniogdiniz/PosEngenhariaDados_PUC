@@ -1,0 +1,14 @@
+FROM bitnami/spark:latest
+
+USER root
+
+# Atualiza repositórios e instala dependências necessárias
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk-headless python3-pip && \
+    pip3 install --no-cache-dir pyspark pandas numpy
+
+# Define o JAVA_HOME
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+USER 1001
